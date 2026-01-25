@@ -1,0 +1,38 @@
+# Create a Repository on GitHub
+#cd /path/to/your/project
+
+git init
+git add .
+
+git commit -m "Initial project commit"
+
+ #Link and Push to GitHub
+ git remote add origin [YOUR_REMOTE_URL]
+
+ git remote -v
+
+ git push -u origin main
+
+#add  You can add files using git add, example git add README, git add <folder>/*, or even git add *
+#Then use git commit -m "<Message>" to commit files
+#Finally git push -u origin master to push files.
+#git status 
+
+git add newfile.txt
+git add .
+
+git commit -m "Add newfile.txt"
+
+git push -u origin master
+git push origin main
+
+
+#Change your remote URL to use SSH
+git remote set-url origin git@github.com:username/repository.git
+
+#error
+git pull origin master
+git push origin master
+
+
+ 
