@@ -23,7 +23,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo systemctl start docker
 
 #docker permission
-sudo groupadd docker
+sudo groupadd docker || true
 sudo usermod -aG docker $USER
 newgrp docker
 
@@ -38,15 +38,21 @@ sudo apt install openssh-server
 curl -s https://install.zerotier.com | sudo bash
 
 #zt planet
-sudo mkdir docker
-cd ./docker
-sudo mkdir ztplanet
-cd ./ztplanet
-sudo nano docker-compose.yml
+#sudo mkdir docker
+#cd ./docker
+mkdir ztplanet
 
+sudo cp $HOME/docker/bashscript/docker-compose.yml $HOME/docker/ztplanet
 
+cd $HOME/docker/ztplanet
 
 sudo docker compose up -d
+
+
+#driver
+sudo ubuntu-drivers devices
+sudo ubnutu-drivers autoinstall
+
 
 
 
