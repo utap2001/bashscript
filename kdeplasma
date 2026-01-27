@@ -1,4 +1,4 @@
-sudo kde install kde-plasma-desktop
+sudo apt install kde-plasma-desktop
 
 #kde-standard, kubuntu-desktop
 #sudo apt autoremove --purge '^kde' '^kubuntu' '^plasma'
