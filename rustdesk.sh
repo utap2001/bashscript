@@ -1,3 +1,5 @@
+#!/bin/bash
+
 bash <(wget -qO- https://get.docker.com)
 wget rustdesk.com/oss.yml -O compose.yml
 sudo docker compose up -d
