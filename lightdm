@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#查看環境使用的顯示管理器
+file /etc/systemd/system/display-manager.service
+
+
+#設定自動登入
+sudo nano /etc/lightdm/lightdm.conf
+
+[Seat:*]             
+autologin-guest=false
+autologin-user=magiclen
+autologin-user-timeout=0   
+
+
+
+
+
+
+
+
+
+
+
+
