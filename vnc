@@ -1,0 +1,46 @@
+sudo apt-get update
+sudo apt-get install x11vnc
+
+mkdir ~/.vnc
+x11vnc -storepasswd ~/.vnc/passwd
+
+#手動啟動
+x11vnc -forever -usepw -display :0 -geometry 1920x1080 -rfbport 5900
+
+#開機啟動
+
+  sudo nano /etc/systemd/system/x11vnc.service
+
+  [Unit]
+Description=Start x11vnc at startup
+After=display-manager.service
+
+[Service]
+Type=simple
+# 請確保路徑正確，通常為 /usr/bin/x11vnc
+# ExecStart=/usr/bin/x11vnc -forever -usepw -display :0 -geometry 1920x1080 -rfbport 5900
+ExecStart=/usr/bin/x11vnc -forever -rfbauth /home/您的使用者名稱/.vnc/passwd -display :0 -geometry 1920x1080 -rfbport 5900 -auth guess
+  Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical.target
+
+-------------
+
+  sudo systemctl daemon-reload
+sudo systemctl enable x11vnc.service
+  
+sudo systemctl start x11vnc.service
+
+
+
+
+找不到 Xauthority
+當 Ubuntu 啟動到登入畫面時，系統會產生一個授權檔案（Auth file）。如果 x11vnc 不知道這個檔案在哪，它就沒權限控制畫面
+
+
+
+  如果你使用的是 sudo 執行服務，x11vnc 會去 /root/.vnc/passwd 找密碼。如果你當初是用自己的帳號設定密碼，它會找不到
+
+  
