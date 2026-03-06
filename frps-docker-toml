@@ -40,17 +40,39 @@ services:
     image: stilleshan/frpc            # 專用客戶端鏡像
     container_name: frpc
     restart: always
+    network_mode: bridge             # 預設即可，也可省略
     volumes:
       - /path/to/your/frpc.toml:/frp/frpc.toml
+
+
+##
+image: stilleshan/frps
+    command: /frp/frpc -c /frp/frpc.toml       # 覆寫預設指令，改跑 frpc
+
     # 若需要映射本機端口（例如要對外提供服務），可加 ports
     ports:
       - "8080:8080"                   # 根據你的 frpc 配置決定
-
-
+     
 ---------------
+fprc toml
+
+# 服务器连接配置（必填）
+serverAddr = "你的 frps 服务器 IP 或域名"
+serverPort = 7000                # 与 frps 的 bindPort 一致
+
+# 认证信息（如果 frps 设置了 auth.token）
+auth.token = "你的令牌"
+
+[[proxies]]
+name = "openclaw"               # 代理名称，必须唯一
+type = "tcp"
+localIP = "127.0.0.1"      
+localPort = 18789
+remotePort = 18000           # 公网 frps 上开放给此服务的端口
 
 
-
-
+-------------
+      "dangerouslyAllowHostHeaderOriginFallback": true,
+      "allowedOrigins": ["http://foscam107.ddns.net:18789"],
 
       
