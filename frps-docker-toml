@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  frps:
+    image: stilleshan/frps
+    container_name: frps
+    restart: always
+    network_mode: host
+    volumes:
+      - ~/docker/frps/frps.toml:/frp/frps.toml
+
+---------------
+
+# frps.toml 完整示例
+
+# 基础
+bindPort = 7000
+
+# 监控面板
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "your_complex_password" # 记得修改！
+
+# 安全认证
+auth.token = "your_strong_token" # 记得修改！
+
+# HTTP 支持
+vhostHTTPPort = 8000
+
+# 泛域名支持
+subdomainHost = "foscam107.ddns.net"
+
+
+------------------------
+version: '3'
+
+services:
+  frpc:
+    image: stilleshan/frpc            # 專用客戶端鏡像
+    container_name: frpc
+    restart: always
+    volumes:
+      - /path/to/your/frpc.toml:/frp/frpc.toml
+    # 若需要映射本機端口（例如要對外提供服務），可加 ports
+    ports:
+      - "8080:8080"                   # 根據你的 frpc 配置決定
+
+
+---------------
+
+
+
+
+
+      
