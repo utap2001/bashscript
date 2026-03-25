@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  redroid:
+    image: erstt/redroid:13.0.0_ndk_magisk_litegapps_ChromeOS
+    container_name: redroid          # 可選，指定容器名稱
+    privileged: true                 # 對應 --privileged
+    ports:
+      - "5555:5555"                  # 對應 -p 5555:5555
+    volumes:
+      # 注意：波浪號 ~ 在 Compose 中不展開，請使用絕對路徑或相對路徑
+      # 以下使用相對於 compose 文件的 ./data 目錄，若需保持原命令的 ~/data，請寫為 ${HOME}/data
+      - ./data:/data
+      - ./sdcard:/data/media
+    stdin_open: true                 # 對應 -i (互動)
+    tty: true                        # 對應 -t (分配偽終端)
+    # detach 是 compose 的預設行為，無需顯式指定
+
+
+
