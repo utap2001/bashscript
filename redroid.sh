@@ -5,4 +5,13 @@ sudo modprobe binder_linux devices="binder,hwbinder,vndbinder"
 echo 'binder_linux options binder_linux devices="binder,hwbinder,vndbinder"' | sudo tee -a /etc/modules-load.d/redroid.conf
 
 
+/etc/modules.load.d/binder.conf
+binder_linux
+
+/etc/modprobe.d/binder.conf
+options binder_linux devices=binder,hwbinder,vndbinder
+
+
+
+
 
