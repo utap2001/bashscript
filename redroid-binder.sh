@@ -22,5 +22,5 @@ update-initramfs -u
 
 echo "-------------------------------------------"
 echo "全部設定完成！請重啟電腦後執行以下指令驗證："
-echo "ls -l /dev/binder*"
+echo "lsmod | grep binder"
 echo "-------------------------------------------"
