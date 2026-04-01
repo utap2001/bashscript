@@ -12,7 +12,7 @@ binder_linux
 /etc/modprobe.d/binder.conf
 options binder_linux devices=binder,hwbinder,vndbinder
 
-
+lsmod | grep binder
 
 
 
