@@ -1,0 +1,26 @@
+server {
+    # 監聽 80 連接埠 (HTTP 預設埠)
+    listen 5181;
+    # 這裡可以填你的網域名稱或 IP，用 _ 代表接受所有請求
+    server_name foscam107.ddns.net;
+
+    # 網站的根目錄，所有檔案都放在這裡
+    root /var/www/;
+    # 預設首頁檔案名稱
+    index index.html;
+
+    # 定義如何處理不同的網址路徑
+    location / {
+        # 嘗試直接存取檔案 ($uri)，若無則嘗試目錄 ($uri/)，再找不到就回傳 404
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;        # 傳遞原始 Host 標頭
+        proxy_set_header X-Real-IP $remote_addr;  # 傳遞客戶端真實 IP
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;  # 傳遞原始協議 (http/https)
+        # 關閉對後端的重定向修改（若後端返回 Location 頭，不想讓 Nginx 自動改寫）
+        #proxy_redirect off;
+        client_max_body_size 10000M; # 設定為您需要的大小
+
+    }
+
+}
